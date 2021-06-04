@@ -1,0 +1,88 @@
+<div class="container">
+	<h5 class="center-align">Cadastrar Escola</h5>
+	<form class="col s12 m12 l12" name="formEscola" data-ng-submit="escola.cadastrar()">
+		<div class="row">
+			<div class="input-field col s12 m3 l3">
+				<select data-ng-model="escola.novo.tipo_escola" required>
+					<option value="" disabled selected>TIPO DA ESCOLA</option>
+					<option value="1">ESCOLA</option>
+					<option value="2">ANEXO</option>
+					<option value="3">CRECHE</option>
+					<option value="4">NOVO MAIS EDUCAÇÃO</option>
+				</select>
+				<label>Tipo da Escola</label>
+			</div>
+			<div class="input-field col s12 m3 l2">
+				<input id="inep_escola" name="inep_escola" type="text" maxlength="8" data-ng-minlength="8"
+					data-ng-pattern="/^((?=\S)(\d{8}))$/" data-ng-model="escola.novo.inep_escola"
+					data-ng-class="{'invalid': formEscola.inep_escola.$error.minlength || formEscola.inep_escola.$error.pattern}"
+					data-uinum>
+				<label for="inep_escola">Código Inep</label>
+			</div>
+			<div class="input-field col s12 m7 l7">
+				<i class="material-icons prefix">school</i>
+				<input id="nome_escola" name="nome_escola" type="text" maxlength="100" required data-ng-minlength="5"
+					data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\(\)\u0027\s]{5,100}))$/"
+					data-ng-model="escola.novo.nome_escola"
+					data-ng-class="{'invalid': formEscola.nome_escola.$error.minlength || formEscola.nome_escola.$error.pattern}"
+					data-uppercase>
+				<label for="nome_escola">Nome da Escola</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m2 l2">
+				<input id="cep_escola" name="cep_escola" type="text" maxlength="9" required data-ng-minlength="9"
+					data-ng-pattern="/^((?=\S)(\d{5}-\d{3}))$/" data-ng-model="escola.novo.cep_escola"
+					data-ng-blur="escola.getEndereco(escola.novo.cep_escola)"
+					data-ng-class="{'invalid': formEscola.cep_escola.$error.minlength || formEscola.cep_escola.$error.pattern}"
+					data-uicep>
+				<label for="cep_escola">Cep</label>
+			</div>
+			<div class="input-field col s10 m9 l9">
+				<i class="material-icons prefix">place</i>
+				<input id="endereco_escola" name="endereco_escola" type="text" maxlength="150" required
+					data-ng-minlength="5" data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\u0027\s]{5,150}))$/"
+					data-ng-model="escola.novo.logradouro_escola"
+					data-ng-class="{'invalid': formEscola.endereco_escola.$error.minlength || formEscola.endereco_escola.$error.pattern}"
+					data-uppercase>
+				<label for="endereco_escola">Endereço</label>
+			</div>
+			<div class="input-field col s2 m1 l1">
+				<input id="numero_escola" name="numero_escola" type="text" maxlength="10" required data-ng-minlength="1"
+					data-ng-pattern="/(^\d{1,10}[A-Z]?)|(S\/N)$/" data-ng-model="escola.novo.numero_escola"
+					data-ng-class="{'invalid': formEscola.numero_escola.$error.minlength || formEscola.numero_escola.$error.pattern}"
+					data-uppercase>
+				<label for="numero_escola">N˚</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12 m4 l4">
+				<input id="bairro_escola" name="bairro_escola" type="text" maxlength="100" required
+					data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,100}))$/"
+					data-ng-model="escola.novo.bairro_escola"
+					data-ng-class="{'invalid': formEscola.bairro_escola.$error.minlength || formEscola.bairro_escola.$error.pattern}"
+					data-uppercase>
+				<label for="bairro_escola">Bairro</label>
+			</div>
+			<div class="input-field col s12 m4 l4">
+				<input id="complemento_escola" name="complemento_escola" type="text" maxlength="100"
+					data-ng-minlength="5" data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,100}))$/"
+					data-ng-model="escola.novo.complemento_escola"
+					data-ng-class="{'invalid': formEscola.complemento_escola.$error.minlength || formEscola.complemento_escola.$error.pattern}"
+					data-uppercase>
+				<label for="complemento_escola">Complemento</label>
+			</div>
+			<div class="input-field col s12 m4 l4">
+				<input id="referencia_escola" name="referencia_escola" type="text" maxlength="100" data-ng-minlength="5"
+					data-ng-pattern="/^((?=\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{5,100}))$/"
+					data-ng-model="escola.novo.referencia_escola"
+					data-ng-class="{'invalid': formEscola.referencia_escola.$error.minlength || formEscola.referencia_escola.$error.pattern}"
+					data-uppercase>
+				<label for="referencia_escola">Ponto de Referência</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn" data-ng-disabled="formEscola.$invalid">Cadastrar</button>
+		</div>
+	</form>
+</div>

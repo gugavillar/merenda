@@ -1,0 +1,16 @@
+<div class="noprint">
+	<nav class="grey lighten-2" role="navigation">
+		<div class="container nav-wrapper">
+			<a data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				<li><a class="black-text" data-ng-click="menu.logout()"><i
+							class="material-icons right">exit_to_app</i>Sair</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<ul class="sidenav noprint" id="mobile-demo">
+	<li><a class="black-text sidenav-close" data-ng-click="menu.logout()"><i
+				class="material-icons right">exit_to_app</i>Sair</a></li>
+</ul>
+<div class="row" data-ui-view></div>

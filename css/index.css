@@ -1,0 +1,55 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	font-family: 'Raleway', sans-serif;
+	overflow-x: hidden;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+main>div>nav>div.container.nav-wrapper {
+	width: 900px;
+}
+
+.page-footer {
+	padding-top: 0px !important;
+}
+
+.top-nav {
+	background-color: #2d4b9a;
+	height: 120px;
+	cursor: pointer;
+}
+
+.header {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.footer-img {
+	width: 135px;
+}
+
+@media only screen and (max-width: 400px) {
+	nav>div.nav-wrapper>div.container>h5 {
+		margin-top: 4%;
+		text-align: center;
+		font-size: 1.7rem;
+	}
+	.top-nav {
+		height: 13vmax;
+	}
+}
+
+@media only screen and (min-width: 400px) and (max-width: 568px) {
+	nav>div.nav-wrapper>div.container>h5 {
+		margin-top: 4%;
+		text-align: center;
+		font-size: 1.7rem;
+	}
+	.top-nav {
+		height: 8vmax;
+	}
+}

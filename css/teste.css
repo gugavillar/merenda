@@ -1,0 +1,20 @@
+.tabs .indicator {
+	background-color: #1976d2;
+}
+
+i.emoji {
+	font-size: 6em;
+	opacity: 0.2;
+}
+
+.select {
+	opacity: 1 !important;
+}
+
+.tab.disabled a {
+	color: rgba(0, 0, 0, .5) !important;
+}
+
+.stripped {
+	background-color: #f2f2f2;
+}

@@ -1,0 +1,108 @@
+<div class="container">
+	<h5 class="center-align noprint">Relatório por Escola</h5>
+	<div class="row center-align">
+		<p class="noprint">O seguinte relatório mostra a quantidade de alimentos entregue na escola escolhida durante o
+			período solicitado</p>
+	</div>
+	<form class="col s12 m12 l12 noprint" name="formRelatorio" data-ng-submit="relatorio.gerar()">
+		<div class="row">
+			<div class="input-field col s12 m6 l5 offset-l1">
+				<select
+					data-ng-options="escola.id_escola as escola.nome_escola group by (escola.tipo_escola | tipoEscola) for escola in relatorio.escolas | orderBy:'tipo_escola'"
+					data-ng-model="relatorio.dados.id_escola" data-ng-change="relatorio.clean()" required>
+					<option value="" disabled selected>ESCOLHA A ESCOLA</option>
+				</select>
+				<label>Escola</label>
+			</div>
+			<div class="input-field col s6 m3 l2">
+				<input class="datepicker" data-ng-model="relatorio.dados.inicio_periodo"
+					data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-minlength="10"
+					data-ng-class="{'invalid': formRelatorio.inicio_periodo.$error.minlength || formRelatorio.inicio_periodo.$error.pattern}"
+					id="inicio_periodo" name="inicio_periodo" type="text" maxlength="10" required data-uidate>
+				<label for="inicio_periodo">Data Inicial</label>
+			</div>
+			<div class="input-field col s6 m3 l2">
+				<input class="datepicker" data-ng-model="relatorio.dados.fim_periodo"
+					data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-minlength="10"
+					data-ng-class="{'invalid': formRelatorio.fim_periodo.$error.minlength || formRelatorio.fim_periodo.$error.pattern}"
+					id="fim_periodo" name="fim_periodo" type="text" maxlength="10" required data-uidate>
+				<label for="fim_periodo">Data Final</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn btn-large"
+				data-ng-disabled="formRelatorio.$invalid">Gerar</button>
+		</div>
+	</form>
+	<div data-ng-if="relatorio.gerado">
+		<table class="col s12">
+			<tr>
+				<td class="center-align"><img class="pref" src="dist/img/pmg.png" alt="Prefeitura de Gravatá"></td>
+			</tr>
+		</table>
+		<div class="col s12 center-align">
+			<h5>RELATÓRIO</h5>
+			<h6><strong>ESCOLA:</strong> {{relatorio.escola.nome_escola}} <strong>TIPO:</strong>
+				{{relatorio.escola.tipo_escola |
+				tipoEscola}}</h6>
+			<h6><strong>PERÍODO:</strong> {{relatorio.dados.inicio_periodo | date:'dd/MM/yyyy'}} &Agrave;
+				{{relatorio.dados.fim_periodo | date:'dd/MM/yyyy'}}</h6>
+		</div>
+		<table class="bordered col s12">
+			<tr>
+				<td class="center-align" colspan="3"><strong>ENTIDADE:</strong>&nbsp;SECRETARIA MUNICIPAL DE EDUCAÇÃO
+				</td>
+			</tr>
+		</table>
+		<div id="secos" class="col s12 m6 l6 center-align">
+			<span>Alimentos Secos</span>
+			<table class="bordered centered">
+				<thead>
+					<tr>
+						<th class="produto center-align">Produto</th>
+						<th class="center-align">Quantidade</th>
+						<th class="center-align">Unidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="item in relatorio.produtos | orderBy:'descricao_alimento'">
+						<td class="produto" data-ng-if="item.tipo_alimento === '1'">{{item.descricao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.quantidade_saida |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.unidade_alimento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="agricultura" class="col s12 m6 l6 center-align">
+			<span>Agricultura Familiar</span>
+			<table class="bordered centered">
+				<thead>
+					<tr>
+						<th class="produto center-align">Produto</th>
+						<th class="center-align">Quantidade</th>
+						<th class="center-align">Unidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="item in relatorio.produtos | orderBy:'descricao_alimento'">
+						<td class="produto" data-ng-if="item.tipo_alimento === '2'">{{item.descricao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.quantidade_saida |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.unidade_alimento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="resposta" class="modal">
+	<div class="modal-content center-align">
+		<h4>ALERTA!</h4>
+		<p>Não foram encontrados dados para o período e escola solicitado</p>
+	</div>
+	<div class="modal-footer">
+		<button data-ng-click="relatorio.clean()"
+			class="modal-action modal-close waves-effect waves-green btn-flat">Ok</button>
+	</div>
+</div>

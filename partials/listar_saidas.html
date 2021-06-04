@@ -1,0 +1,61 @@
+<div class="container big">
+	<h5 class="center-align">Lista de Guias de Saída</h5>
+	<div class="row">
+		<div class="input-field col s6 m3 l3 offset-s6 offset-m9 offset-l9">
+			<i class="material-icons prefix">search</i>
+			<input class="tooltipped" data-delay="50" data-position="bottom" data-tooltip="Digite o número da guia"
+				id="query" name="query" type="text" maxlength="10" data-ng-model="lista.query"
+				data-ng-change="lista.search()" data-uinum>
+			<label for="query">Buscar Guia</label>
+		</div>
+	</div>
+	<table class="table highlight responsive-table centered" at-table at-paginated at-list="lista.guides"
+		at-config="lista.config">
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td at-title="Nº Guia" at-implicit at-sortable at-attribute="num_saida"></td>
+				<td at-title="Escola" at-implicit at-attribute="nome_escola"></td>
+				<td at-title="Tipo" data-ng-bind="(item.tipo_escola | tipoEscola)"></td>
+				<td at-title="Data de Emissão" data-ng-bind="(item.data_emissao_saida | data)" at-sortable></td>
+				<td>
+					<button class="btn-floating red tooltipped hide-on-med-and-down" data-delay="50"
+						data-position="bottom" data-tooltip="Excluir guia"
+						data-ng-click="lista.modal(item.id_saida, item.num_saida)"><i
+							class="material-icons">delete</i></button>
+					<button class="btn-floating tooltipped hide-on-med-and-down" data-delay="50" data-position="bottom"
+						data-tooltip="Editar guia" data-ui-sref="menu.editarguiasaida({id_saida: item.id_saida})"><i
+							class="material-icons">mode_edit</i></button>
+					<a class="btn-floating tooltipped blue darken-2" data-delay="50" data-position="bottom"
+						data-tooltip="Visualizar guia"
+						data-ui-sref="menu.imprimirguiasaida({id_saida: item.id_saida})"><i
+							class="material-icons">description</i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align" at-list="lista.guides" at-config="lista.config"></at-pagination>
+</div>
+<div id="excluir_guia" class="modal">
+	<div class="modal-content center-align">
+		<h4>ALERTA!</h4>
+		<p class="flow-text">Deseja excluir a guia de número {{lista.num_saida}} ?</p>
+	</div>
+	<div class="modal-footer">
+		<button data-ng-click="lista.excluir(lista.id_saida)"
+			class="modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+		<button class="modal-action modal-close waves-effect waves-red btn-flat">Não</button>
+	</div>
+</div>
+<div id="excluir_guia_aviso" class="modal">
+	<div class="modal-content center-align">
+		<h4>ALERTA!</h4>
+		<p class="flow-text">Para realizar essa operação é necessário que você exclua todos os itens na guia de número
+			{{lista.num_saida}}. Deseja excluir os itens agora?</p>
+	</div>
+	<div class="modal-footer">
+		<button data-ui-sref="menu.editarguiasaida({id_saida: lista.id_saida})"
+			class="modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+		<button class="modal-action modal-close waves-effect waves-red btn-flat">Não</button>
+	</div>
+</div>

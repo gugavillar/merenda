@@ -1,0 +1,62 @@
+<div class="container">
+	<h5 class="center-align">Dashboard</h5>
+</div>
+<div class="center-align hide">
+	<img class="responsive-img dash-img" src="dist/img/pmg.png" alt="Prefeitura de Gravatá">
+</div>
+<div class="row">
+	<div class="col s12 m6 l6">
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title grey-text text-darken-4 center-align">Alimentos com Menor Estoque
+					Fundamental</span>
+				<table class="highlight centered dashboard-table">
+					<thead>
+						<tr>
+							<th>Alimento</th>
+							<th>Tipo</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="item in dashboard.alimentosEstoque"
+							data-ng-if="item.programa_entrada === '1'">
+							<td data-ng-bind="item.descricao_alimento"></td>
+							<td data-ng-bind="item.tipo_alimento | tipoAlimento"></td>
+							<td
+								data-ng-bind="(item.quantidade_comprada_itensentrada - item.quantidade_distribuida_itensentrada) | tipoDistribuicao:item.tipo_distribuicao_alimento">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col s12 m6 l6">
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title grey-text text-darken-4 center-align">Alimentos com Menor Estoque Mais
+					Educação</span>
+				<table class="highlight centered dashboard-table">
+					<thead>
+						<tr>
+							<th>Alimento</th>
+							<th>Tipo</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="item in dashboard.alimentosEstoque"
+							data-ng-if="item.programa_entrada === '2'">
+							<td data-ng-bind="item.descricao_alimento"></td>
+							<td data-ng-bind="item.tipo_alimento | tipoAlimento"></td>
+							<td
+								data-ng-bind="(item.quantidade_comprada_itensentrada - item.quantidade_distribuida_itensentrada) | tipoDistribuicao:item.tipo_distribuicao_alimento">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

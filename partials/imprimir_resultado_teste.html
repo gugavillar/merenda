@@ -1,0 +1,530 @@
+<div class="container">
+	<div class="row right-align">
+		<button class="waves-effect waves-light btn btn-large noprint btn-imprimir" data-ng-click="imprimir.print()"><i
+				class="material-icons right">print</i>Imprimir</button>
+	</div>
+	<div class="center-align">
+		<img class="pref" src="dist/img/pmg.png" alt="Prefeitura de Gravatá">
+	</div>
+	<div class="col s12 center-align">
+		<h5>Respostas do Teste de Aceitabilidade</h5>
+		<table class="bordered centered col s12">
+			<tr>
+				<td colspan="2">
+					<strong>ESCOLA:</strong>&nbsp;{{imprimir.dados.nome_escola}}&nbsp;{{imprimir.dados.tipo_escola |
+					tipoEscola}}</td>
+			</tr>
+			<tr>
+				<td colspan="2"><strong>PERÍODO:</strong>&nbsp;{{imprimir.dados.inicio_periodo_testeaceitabilidade |
+					date:'dd/MM/yyyy'}}&nbsp;à&nbsp;{{imprimir.dados.fim_periodo_testeaceitabilidade |
+					date:'dd/MM/yyyy'}}</td>
+			</tr>
+			<tr>
+				<td><strong>quantitativo_afazer_testeaceitabilidade:</strong>&nbsp;{{imprimir.dados.quantitativo_afazer_testeaceitabilidade}}
+				</td>
+				<td><strong>REALIZADOS:</strong>&nbsp;{{imprimir.dados.quantitativo_realizado_testeaceitabilidade}}</td>
+			</tr>
+			<tr>
+				<td>
+					<h6><strong>ACEITABILIDADE:</strong>&nbsp;{{(imprimir.totalotimo /
+						imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100) + (imprimir.totalbom /
+						imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100) + (imprimir.totalregular /
+						imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100) | currency:'':2}}%</h6>
+				</td>
+				<td>
+					<h6><strong>% REALIZADA:</strong>&nbsp;{{imprimir.dados.quantitativo_realizado_testeaceitabilidade /
+						imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 | currency:'':2}}%</h6>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col s12 m12 l12">
+		<div class="card">
+			<div class="card-content center-align">
+				<span class="card-title activator grey-text text-darken-4">Resultado do Teste</span>
+				<table class="centered responsive-table">
+					<tbody>
+						<tr class="stripped">
+							<td></td>
+							<td></td>
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td data-ng-bind="imprimir.totalotimo"></td>
+							<td data-ng-bind="imprimir.totalbom"></td>
+							<td data-ng-bind="imprimir.totalregular"></td>
+							<td data-ng-bind="imprimir.totalruim"></td>
+							<td data-ng-bind="imprimir.totalpessimo"></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>{{imprimir.totalotimo / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalbom / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalregular / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruim / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalpessimo / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>1˚ ANO</strong></td>
+							<td><strong>2˚ ANO</strong></td>
+							<td><strong>3˚ ANO</strong></td>
+							<td><strong>4˚ ANO</strong></td>
+							<td><strong>5˚ ANO</strong></td>
+							<td><strong>6˚ ANO</strong></td>
+							<td><strong>7˚ ANO</strong></td>
+							<td><strong>8˚ ANO</strong></td>
+							<td><strong>9˚ ANO</strong></td>
+						</tr>
+						<tr>
+							<td data-ng-bind="imprimir.totalanoum"></td>
+							<td data-ng-bind="imprimir.totalanodois"></td>
+							<td data-ng-bind="imprimir.totalanotres"></td>
+							<td data-ng-bind="imprimir.totalanoquatro"></td>
+							<td data-ng-bind="imprimir.totalanocinco"></td>
+							<td data-ng-bind="imprimir.totalanoseis"></td>
+							<td data-ng-bind="imprimir.totalanosete"></td>
+							<td data-ng-bind="imprimir.totalanooito"></td>
+							<td data-ng-bind="imprimir.totalanonove"></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalanoum / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalanodois / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalanotres / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalanoquatro / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100
+								| currency:'':2}}%</td>
+							<td>{{imprimir.totalanocinco / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100
+								| currency:'':2}}%</td>
+							<td>{{imprimir.totalanoseis / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalanosete / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalanooito / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalanonove / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><strong>MANHÃ</strong></td>
+							<td><strong>TARDE</strong></td>
+							<td><strong>NOITE</strong></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td data-ng-bind="imprimir.totalmanha"></td>
+							<td data-ng-bind="imprimir.totaltarde"></td>
+							<td data-ng-bind="imprimir.totalnoite"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>{{imprimir.totalmanha / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totaltarde / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalnoite / imprimir.dados.quantitativo_afazer_testeaceitabilidade * 100 |
+								currency:'':2}}%</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col s12 m12 l12 noprint">
+		<div class="card">
+			<div class="card-content center-align">
+				<span class="card-title activator grey-text text-darken-4">Tipo de Respostas por Turno</span>
+				<table class="centered">
+					<tbody>
+						<tr class="stripped">
+							<td colspan="5"><strong>MANHÃ</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimomanha}}</td>
+							<td>{{imprimir.totalbommanha}}</td>
+							<td>{{imprimir.totalregularmanha}}</td>
+							<td>{{imprimir.totalruimmanha}}</td>
+							<td>{{imprimir.totalpessimomanha}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimomanha / imprimir.totalmanha * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbommanha / imprimir.totalmanha * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalregularmanha / imprimir.totalmanha * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalruimmanha / imprimir.totalmanha * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalpessimomanha / imprimir.totalmanha * 100 | noNumber | currency:'':2}}%
+							</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>TARDE</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimotarde}}</td>
+							<td>{{imprimir.totalbomtarde}}</td>
+							<td>{{imprimir.totalregulartarde}}</td>
+							<td>{{imprimir.totalruimtarde}}</td>
+							<td>{{imprimir.totalpessimotarde}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimotarde / imprimir.totaltarde * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomtarde / imprimir.totaltarde * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalregulartarde / imprimir.totaltarde * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalruimtarde / imprimir.totaltarde * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalpessimotarde / imprimir.totaltarde * 100 | noNumber | currency:'':2}}%
+							</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>NOITE</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimonoite}}</td>
+							<td>{{imprimir.totalbomnoite}}</td>
+							<td>{{imprimir.totalregularnoite}}</td>
+							<td>{{imprimir.totalruimnoite}}</td>
+							<td>{{imprimir.totalpessimonoite}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimonoite / imprimir.totalnoite * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomnoite / imprimir.totalnoite * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalregularnoite / imprimir.totalnoite * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalruimnoite / imprimir.totalnoite * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalpessimonoite / imprimir.totalnoite * 100 | noNumber | currency:'':2}}%
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col s12 m12 l12 noprint">
+		<div class="card">
+			<div class="card-content center-align">
+				<span class="card-title activator grey-text text-darken-4">Tipo de Respostas por Série</span>
+				<table class="centered">
+					<tbody>
+						<tr class="stripped">
+							<td colspan="5"><strong>1˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanoum}}</td>
+							<td>{{imprimir.totalbomanoum}}</td>
+							<td>{{imprimir.totalregularanoum}}</td>
+							<td>{{imprimir.totalruimanoum}}</td>
+							<td>{{imprimir.totalpessimoanoum}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanoum / imprimir.totalanoum * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomanoum / imprimir.totalanoum * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalregularanoum / imprimir.totalanoum * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalruimanoum / imprimir.totalanoum * 100 | noNumber | currency:'':2}}%</td>
+							<td>{{imprimir.totalpessimoanoum / imprimir.totalanoum * 100 | noNumber | currency:'':2}}%
+							</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>2˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanodois}}</td>
+							<td>{{imprimir.totalbomanodois}}</td>
+							<td>{{imprimir.totalregularanodois}}</td>
+							<td>{{imprimir.totalruimanodois}}</td>
+							<td>{{imprimir.totalpessimoanodois}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanodois / imprimir.totalanodois * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomanodois / imprimir.totalanodois * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalregularanodois / imprimir.totalanodois * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanodois / imprimir.totalanodois * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalpessimoanodois / imprimir.totalanodois * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>3˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanotres}}</td>
+							<td>{{imprimir.totalbomanotres}}</td>
+							<td>{{imprimir.totalregularanotres}}</td>
+							<td>{{imprimir.totalruimanotres}}</td>
+							<td>{{imprimir.totalpessimoanotres}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanotres / imprimir.totalanotres * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomanotres / imprimir.totalanotres * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalregularanotres / imprimir.totalanotres * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanotres / imprimir.totalanotres * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalpessimoanotres / imprimir.totalanotres * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>4˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanoquatro}}</td>
+							<td>{{imprimir.totalbomanoquatro}}</td>
+							<td>{{imprimir.totalregularanoquatro}}</td>
+							<td>{{imprimir.totalruimanoquatro}}</td>
+							<td>{{imprimir.totalpessimoanoquatro}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanoquatro / imprimir.totalanoquatro * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalbomanoquatro / imprimir.totalanoquatro * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalregularanoquatro / imprimir.totalanoquatro * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanoquatro / imprimir.totalanoquatro * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalpessimoanoquatro / imprimir.totalanoquatro * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>5˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanocinco}}</td>
+							<td>{{imprimir.totalbomanocinco}}</td>
+							<td>{{imprimir.totalregularanocinco}}</td>
+							<td>{{imprimir.totalruimanocinco}}</td>
+							<td>{{imprimir.totalpessimoanocinco}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanocinco / imprimir.totalanocinco * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalbomanocinco / imprimir.totalanocinco * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalregularanocinco / imprimir.totalanocinco * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanocinco / imprimir.totalanocinco * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalpessimoanocinco / imprimir.totalanocinco * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>6˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanoseis}}</td>
+							<td>{{imprimir.totalbomanoseis}}</td>
+							<td>{{imprimir.totalregularanoseis}}</td>
+							<td>{{imprimir.totalruimanoseis}}</td>
+							<td>{{imprimir.totalpessimoanoseis}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanoseis / imprimir.totalanoseis * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomanoseis / imprimir.totalanoseis * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalregularanoseis / imprimir.totalanoseis * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanoseis / imprimir.totalanoseis * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalpessimoanoseis / imprimir.totalanoseis * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>7˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanosete}}</td>
+							<td>{{imprimir.totalbomanosete}}</td>
+							<td>{{imprimir.totalregularanosete}}</td>
+							<td>{{imprimir.totalruimanosete}}</td>
+							<td>{{imprimir.totalpessimoanosete}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanosete / imprimir.totalanosete * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomanosete / imprimir.totalanosete * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalregularanosete / imprimir.totalanosete * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanosete / imprimir.totalanosete * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalpessimoanosete / imprimir.totalanosete * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>8˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanooito}}</td>
+							<td>{{imprimir.totalbomanooito}}</td>
+							<td>{{imprimir.totalregularanooito}}</td>
+							<td>{{imprimir.totalruimanooito}}</td>
+							<td>{{imprimir.totalpessimoanooito}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanooito / imprimir.totalanooito * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomanooito / imprimir.totalanooito * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalregularanooito / imprimir.totalanooito * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanooito / imprimir.totalanooito * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalpessimoanooito / imprimir.totalanooito * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+						<tr class="stripped">
+							<td colspan="5"><strong>9˚ ANO</strong></td>
+						</tr>
+						<tr class="stripped">
+							<td><strong>ÓTIMO</strong></td>
+							<td><strong>BOM</strong></td>
+							<td><strong>REGULAR</strong></td>
+							<td><strong>RUIM</strong></td>
+							<td><strong>PÉSSIMO</strong></td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanonove}}</td>
+							<td>{{imprimir.totalbomanonove}}</td>
+							<td>{{imprimir.totalregularanonove}}</td>
+							<td>{{imprimir.totalruimanonove}}</td>
+							<td>{{imprimir.totalpessimoanonove}}</td>
+						</tr>
+						<tr>
+							<td>{{imprimir.totalotimoanonove / imprimir.totalanonove * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalbomanonove / imprimir.totalanonove * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalregularanonove / imprimir.totalanonove * 100 | noNumber |
+								currency:'':2}}%</td>
+							<td>{{imprimir.totalruimanonove / imprimir.totalanonove * 100 | noNumber | currency:'':2}}%
+							</td>
+							<td>{{imprimir.totalpessimoanonove / imprimir.totalanonove * 100 | noNumber |
+								currency:'':2}}%</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+	<h5 class="center-align noprint">Cadastrar Teste de Aceitabilidade</h5>
+	<form name="formTeste" data-ng-submit="teste.cadastrar()">
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<select
+					data-ng-options="escola.id_escola as escola.nome_escola group by (escola.tipo_escola | tipoEscola) for escola in teste.escolas | orderBy:'tipo'"
+					data-ng-model="teste.dados.id_escola_testeaceitabilidade" required>
+					<option value="" disabled selected>ESCOLHA A ESCOLA</option>
+				</select>
+				<label>Escola</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s4 m4 l4">
+				<input class="right-align" id="quantitativo_afazer_testeaceitabilidade"
+					name="quantitativo_afazer_testeaceitabilidade" type="text" required
+					data-ng-model="teste.dados.quantitativo_afazer_testeaceitabilidade"
+					data-ng-pattern="/^((?=\S)(\d{1,10}))$/" data-ng-minlength="1"
+					data-ng-class="{'invalid': formTeste.quantitativo_afazer_testeaceitabilidade.$error.minlength || formTeste.quantitativo_afazer_testeaceitabilidade.$error.pattern}"
+					data-uinum maxlength="10">
+				<label for="quantitativo_afazer_testeaceitabilidade">Quantitativo</label>
+			</div>
+			<div class="input-field col s4 m4 l4">
+				<input class="datepicker" data-ng-model="teste.dados.inicio_periodo_testeaceitabilidade"
+					data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-minlength="10"
+					data-ng-class="{'invalid': formTeste.inicio_periodo_testeaceitabilidade.$error.minlength || formTeste.inicio_periodo_testeaceitabilidade.$error.pattern}"
+					id="inicio_periodo_testeaceitabilidade" name="inicio_periodo_testeaceitabilidade" type="text"
+					maxlength="10" required data-uidate>
+				<label for="inicio_periodo_testeaceitabilidade">Data Inicial</label>
+			</div>
+			<div class="input-field col s4 m4 l4">
+				<input class="datepicker" data-ng-model="teste.dados.fim_periodo_testeaceitabilidade"
+					data-ng-pattern="/^(0[1-9]|1[0-9]|2[0-9]|3[01])[/](0[1-9]|1[012])[/]\d{4}$/" data-ng-minlength="10"
+					data-ng-class="{'invalid': formTeste.fim_periodo_testeaceitabilidade.$error.minlength || formTeste.fim_periodo_testeaceitabilidade.$error.pattern}"
+					id="fim_periodo_testeaceitabilidade" name="fim_periodo_testeaceitabilidade" type="text"
+					maxlength="10" required data-uidate>
+				<label for="fim_periodo_testeaceitabilidade">Data Final</label>
+			</div>
+			<div class="row right-align">
+				<button class="waves-effect waves-light btn" data-ng-disabled="formTeste.$invalid">Cadastrar</button>
+			</div>
+		</div>
+	</form>
+</div>

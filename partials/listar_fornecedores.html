@@ -1,0 +1,41 @@
+<div class="container big">
+	<h5 class="center-align">Lista de Fornecedores</h5>
+	<div class="row">
+		<div class="input-field col s6 m4 l4 offset-s6 offset-m8 offset-l8">
+			<i class="material-icons prefix">search</i>
+			<input class="tooltipped" data-delay="50" data-position="bottom" data-tooltip="Digite o nome do fornecedor"
+				id="query" name="query" type="text" maxlength="20" data-ng-model="lista.query"
+				data-ng-change="lista.search()" data-uppercase>
+			<label for="query">Buscar Fornecedor</label>
+		</div>
+	</div>
+	<table class="table highlight responsive-table centered col s12" at-table at-paginated at-list="lista.fornecedores"
+		at-config="lista.config">
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td at-title="CNPJ" data-ng-bind="(item.cnpj_fornecedor | cnpj)"></td>
+				<td at-title="Nome" at-implicit at-attribute="nome_fornecedor" at-sortable></td>
+				<td at-title="Contato" at-implicit at-attribute="contato_fornecedor"></td>
+				<td at-title="Email" at-implicit at-attribute="email_fornecedor"></td>
+				<td class="hide-on-med-and-down">
+					<button class="btn-floating red tooltipped" data-delay="50" data-position="bottom"
+						data-tooltip="Excluir fornecedor" data-ng-click="lista.modal(item)"><i
+							class="material-icons">delete</i></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align" at-list="lista.fornecedores" at-config="lista.config"></at-pagination>
+</div>
+<div id="excluir_fornecedor" class="modal">
+	<div class="modal-content center-align">
+		<h4>ALERTA!</h4>
+		<p class="flow-text">Deseja excluir o fornecedor {{lista.modal_data.nome_fornecedor}} ?</p>
+	</div>
+	<div class="modal-footer">
+		<button data-ng-click="lista.excluir(lista.modal_data.id_fornecedor)"
+			class="modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+		<button class="modal-action modal-close waves-effect waves-red btn-flat">Não</button>
+	</div>
+</div>

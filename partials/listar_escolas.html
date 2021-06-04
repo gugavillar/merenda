@@ -1,0 +1,41 @@
+<div class="container big">
+	<h5 class="center-align">Lista de Escolas</h5>
+	<div class="row noprint">
+		<div class="input-field col s6 m4 l4 offset-s6 offset-m8 offset-l8">
+			<i class="material-icons prefix">search</i>
+			<input class="tooltipped" data-delay="50" data-position="bottom" data-tooltip="Digite o nome da escola"
+				id="query" name="query" type="text" maxlength="20" data-ng-model="lista.query"
+				data-ng-change="lista.search()" data-uppercase>
+			<label for="query">Buscar Escola</label>
+		</div>
+	</div>
+	<table class="table highlight responsive-table centered noprint" at-table at-paginated at-list="lista.escolas"
+		at-config="lista.config">
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td at-title="Código Inep" at-implicit at-attribute="inep_escola"></td>
+				<td at-title="Escola" at-implicit at-attribute="nome_escola" at-sortable></td>
+				<td at-title="Tipo" data-ng-bind="(item.tipo_escola | tipoEscola)"></td>
+				<td at-title="Endereço" at-implicit at-attribute="logradouro_escola"></td>
+				<td class="hide-on-med-and-down">
+					<button class="btn-floating red tooltipped" data-delay="50" data-position="bottom"
+						data-tooltip="Excluir escola" data-ng-click="lista.modal(item)"><i
+							class="material-icons">delete</i></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align noprint" at-list="lista.escolas" at-config="lista.config"></at-pagination>
+</div>
+<div id="excluir_escola" class="modal">
+	<div class="modal-content center-align">
+		<h4>ALERTA!</h4>
+		<p class="flow-text">Deseja excluir a escola {{lista.modal_data.nome_escola}} ?</p>
+	</div>
+	<div class="modal-footer">
+		<button data-ng-click="lista.excluir(lista.modal_data.id_escola)"
+			class="modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+		<button class="modal-action modal-close waves-effect waves-red btn-flat">Não</button>
+	</div>
+</div>

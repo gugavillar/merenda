@@ -1,0 +1,111 @@
+<div class="container">
+	<div class="row right-align">
+		<button class="waves-effect waves-light btn btn-large noprint btn-imprimir" data-ng-click="imprimir.print()"><i
+				class="material-icons right">print</i>Imprimir</button>
+	</div>
+	<table class="col s12">
+		<tr>
+			<td class="left-align"><img class="pref" src="dist/img/pmg.png" alt="Prefeitura de Gravatá"></td>
+			<td class="right-align"><img class="fnde" src="dist/img/fnde.png" alt="Fundo Nacional do Desenvolvimento">
+			</td>
+		</tr>
+	</table>
+	<div class="col s12 center-align">
+		<h5>Guia de Distribuição e Remessa</h5>
+		<table>
+			<tr>
+				<td><strong>Nº:</strong>&nbsp;{{imprimir.guia.num_saida}}</td>
+				<td><strong>DATA DE EMISSÃO:</strong>&nbsp;{{imprimir.guia.data_emissao_saida | data}}</td>
+				<td><strong>DATA DE ENTREGA:</strong></td>
+			</tr>
+			<tr>
+				<td class="center-align" colspan="3"><strong>ENTIDADE:</strong>&nbsp;SECRETARIA MUNICIPAL DE EDUCAÇÃO
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col s12 center-align">
+		<h5>Dados da Escola</h5>
+		<table class="bordered col s12">
+			<tr>
+				<td><strong>NOME:</strong>&nbsp;{{imprimir.guia.nome_escola}}<span
+						data-ng-if="imprimir.guia.tipo_escola !== '1'">&nbsp;({{imprimir.guia.tipo_escola |
+						tipoEscola}})</span></td>
+				<td><strong>INEP:</strong>&nbsp;{{imprimir.guia.inep_escola}}</td>
+			</tr>
+			<tr>
+				<td><strong>ENDEREÇO:</strong>&nbsp;{{imprimir.guia.logradouro_escola}},&nbsp;{{imprimir.guia.numero_escola}}
+				</td>
+				<td><strong>CEP:</strong>&nbsp;{{imprimir.guia.cep_escola | cep}}</td>
+			</tr>
+			<tr>
+				<td><strong>BAIRRO:</strong>&nbsp;{{imprimir.guia.bairro_escola}}</td>
+				<td><strong>CIDADE/UF:</strong>&nbsp;GRAVATÁ&nbsp;-&nbsp;PE</td>
+			</tr>
+			<tr data-ng-if="imprimir.guia.referencia_escola">
+				<td><strong>REFERÊNCIA:</strong>&nbsp;{{imprimir.guia.referencia_escola}}</td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+	<div class="col s12 center-align">
+		<h5>ESPECIFICAÇÃO DOS PRODUTOS</h5>
+	</div>
+	<div id="secos" class="col s12 m6 l6 center-align">
+		<strong>Alimentos Secos</strong>
+		<table class="bordered centered">
+			<thead>
+				<tr>
+					<th class="produto center-align">Produto</th>
+					<th class="center-align">Quantidade</th>
+					<th class="center-align">Unidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="item in imprimir.produtos | orderBy:'descricao_alimento'">
+					<td class="produto" data-ng-if="item.tipo_alimento === '1'">{{item.descricao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '1'">{{item.quantidade_saida_itenssaida |
+						tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '1'">{{item.unidade_alimento}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="agricultura" class="col s12 m6 l6 center-align">
+		<strong>Agricultura Familiar</strong>
+		<table class="bordered centered">
+			<thead>
+				<tr>
+					<th class="produto center-align">Produto</th>
+					<th class="center-align">Quantidade</th>
+					<th class="center-align">Unidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="item in imprimir.produtos | orderBy:'descricao_alimento'">
+					<td class="produto" data-ng-if="item.tipo_alimento === '2'">{{item.descricao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '2'">{{item.quantidade_saida_itenssaida |
+						tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '2'">{{item.unidade_alimento}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="linhas col s11 onlyprint">
+		<div class="col s4">
+			<hr>
+			<p class="center-align">Assinatura do Entregador</p>
+			<p>Cargo:</p>
+		</div>
+		<div class="col s4">
+			<hr>
+			<p class="center-align">Responsável pelo Recebimento</p>
+			<p>Cargo:</p>
+		</div>
+		<div class="col s4">
+			<hr>
+			<p class="center-align">Responsável pela Escola</p>
+			<p>Cargo:</p>
+		</div>
+	</div>
+</div>

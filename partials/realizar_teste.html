@@ -1,0 +1,126 @@
+<div class="container">
+	<h4 class="center-align">TESTE DE ACEITABILIDADE DA ALIMENTAÇÃO</h4>
+	<form name="formTeste" data-ng-submit="realizarteste.finalizar()">
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<select required
+					data-ng-options="escolatesteaceitabilidade.id_testeaceitabilidade as escolatesteaceitabilidade.nome_escola group by (escolatesteaceitabilidade.tipo_escola | tipoEscola) for escolatesteaceitabilidade in realizarteste.escolas | orderBy:'tipo_escola'"
+					data-ng-model="realizarteste.dados.id_testeaceitabilidade_testeaceitabilidaderesposta">
+					<option value="" disabled selected>Escolha a Escola</option>
+				</select>
+				<label>Escola</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<select required data-ng-model="realizarteste.dados.serie_testeaceitabilidaderesposta">
+					<option value="" disabled selected>Escolha a Série</option>
+					<option value="1">1˚ Ano</option>
+					<option value="2">2˚ Ano</option>
+					<option value="3">3˚ Ano</option>
+					<option value="4">4˚ Ano</option>
+					<option value="5">5˚ Ano</option>
+					<option value="6">6˚ Ano</option>
+					<option value="7">7˚ Ano</option>
+					<option value="8">8˚ Ano</option>
+					<option value="9">9˚ Ano</option>
+				</select>
+				<label>Série</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<select required data-ng-model="realizarteste.dados.turno_testeaceitabilidaderesposta">
+					<option value="" disabled selected>Escolha o Turno</option>
+					<option value="1">Manhã</option>
+					<option value="2">Tarde</option>
+					<option value="3">Noite</option>
+				</select>
+				<label>Turno</label>
+			</div>
+		</div>
+		<div class="row">
+			<p class="center-align flow-text">Marque a imagem que mais representa o que você achou dos cardápios:</p>
+			<div class="col s12 m2 l2 center-align offset-m1 offset-l1">
+				<p data-ng-model="realizarteste.dados.resposta_testeaceitabilidaderesposta"
+					data-ng-click="realizarteste.select(5, 'cinco')"><i
+						data-ng-class="{select: realizarteste.class.cinco}"
+						class="emoji emoji-smiling-face-with-heart-eyes" aria-hidden="true"></i></p>
+				<h4 class="hide-on-med-and-up">ÓTIMO</h4>
+				<h5 class="hide-on-small-only">ÓTIMO</h5>
+			</div>
+			<div class="col s12 m2 l2 center-align">
+				<p data-ng-model="realizarteste.dados.resposta_testeaceitabilidaderesposta"
+					data-ng-click="realizarteste.select(4, 'quatro')"><i
+						data-ng-class="{select: realizarteste.class.quatro}" class="emoji emoji-grinning-face"
+						aria-hidden="true"></i></p>
+				<h4 class="hide-on-med-and-up">BOM</h4>
+				<h5 class="hide-on-small-only">BOM</h5>
+			</div>
+			<div class="col s12 m2 l2 center-align">
+				<p data-ng-model="realizarteste.dados.resposta_testeaceitabilidaderesposta"
+					data-ng-click="realizarteste.select(3, 'tres')"><i
+						data-ng-class="{select: realizarteste.class.tres}" class="emoji emoji-neutral-face"
+						aria-hidden="true"></i></p>
+				<h4 class="hide-on-med-and-up">REGULAR</h4>
+				<h5 class="hide-on-small-only">REGULAR</h5>
+			</div>
+			<div class="col s12 m2 l2 center-align">
+				<p data-ng-model="realizarteste.dados.resposta_testeaceitabilidaderesposta"
+					data-ng-click="realizarteste.select(2, 'dois')"><i
+						data-ng-class="{select: realizarteste.class.dois}" class="emoji emoji-slightly-frowning-face"
+						aria-hidden="true"></i></p>
+				<h4 class="hide-on-med-and-up">RUIM</h4>
+				<h5 class="hide-on-small-only">RUIM</h5>
+			</div>
+			<div class="col s12 m2 l2 center-align">
+				<p data-ng-model="realizarteste.dados.resposta_testeaceitabilidaderesposta"
+					data-ng-click="realizarteste.select(1, 'um')"><i data-ng-class="{select: realizarteste.class.um}"
+						class="emoji emoji-angry-face" aria-hidden="true"></i></p>
+				<h4 class="hide-on-med-and-up">PÉSSIMO</h4>
+				<h5 class="hide-on-small-only">PÉSSIMO</h5>
+			</div>
+			<div class="row right-align">
+				<button class="waves-effect waves-light btn btn-teste"
+					data-ng-disabled="formTeste.$invalid">Finalizar</button>
+			</div>
+		</div>
+	</form>
+</div>
+<!--Modal Alert-->
+<div id="alert" class="modal">
+	<div class="modal-content center-align">
+		<h4>Alerta</h4>
+		<p class="flow-text">Não há teste cadastrado</p>
+		<div class="modal-footer">
+			<button data-ui-sref="login" class="modal-action modal-close waves-effect waves-red btn-flat">Ok</button>
+		</div>
+	</div>
+</div>
+
+<!--Modal End-->
+<div id="end" class="modal">
+	<div class="modal-content center-align">
+		<h4>Obrigado!</h4>
+		<p class="flow-text">Foi atingido o limite de entrevistados!</p>
+		<div class="modal-footer">
+			<button data-ui-sref="login" class="modal-action modal-close waves-effect waves-red btn-flat">Ok</button>
+		</div>
+	</div>
+</div>
+
+<!--Modal Confirmation-->
+<div id="confirmation" class="modal">
+	<div class="modal-content">
+		<h4 class="center-align">Os dados abaixo estão corretos?</h4>
+		<p class="flow-text"><strong>Escola:</strong>&nbsp;{{realizarteste.dados.nome_escola}}</p>
+		<p class="flow-text">
+			<strong>Série:</strong>&nbsp;{{realizarteste.dados.serie_testeaceitabilidaderesposta}}˚&nbsp;Ano</p>
+		<p class="flow-text"><strong>Turno:</strong>&nbsp;{{realizarteste.dados.turno_testeaceitabilidaderesposta |
+			turno}}</p>
+		<p class="flow-text"><strong>Resposta:</strong>&nbsp;{{realizarteste.dados.resposta_testeaceitabilidaderesposta
+			|
+			resposta}}</p>
+		<div class="modal-footer">
+			<button data-ng-click="realizarteste.salvar()"
+				class="modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+			<button class="modal-action modal-close waves-effect waves-red btn-flat">Não</button>
+		</div>
+	</div>
+</div>

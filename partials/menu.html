@@ -1,0 +1,88 @@
+<div class="noprint">
+	<ul id="cadastrar-dropdown" class="dropdown-content">
+		<li><a class="black-text" data-ui-sref="menu.escolas">Escola</a></li>
+		<li><a class="black-text" data-ui-sref="menu.alimentos">Alimento</a></li>
+		<li><a class="black-text" data-ui-sref="menu.fornecedores">Fornecedor</a></li>
+		<li><a class="black-text" data-ui-sref="menu.testesdeaceitabilidade">Testes</a></li>
+	</ul>
+	<ul id="gerar-dropdown" class="dropdown-content">
+		<li><a class="black-text" data-ui-sref="menu.gerarguiasaida">Saída</a></li>
+		<li><a class="black-text" data-ui-sref="menu.gerarguiaentrada">Entrada</a></li>
+	</ul>
+	<ul id="listar-dropdown" class="dropdown-content">
+		<li><a class="black-text" data-ui-sref="menu.listarsaidas">Saidas</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listarentradas">Entradas</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listarescolas">Escolas</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listaralimentos">Alimentos</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listarfornecedores">Fornecedores</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listartestesdeaceitabilidade">Testes</a></li>
+	</ul>
+	<ul id="relatorio-dropdown" class="dropdown-content">
+		<li><a class="black-text" data-ui-sref="menu.relatorioporescola">Por Escola</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatoriotipoescola">Tipo Escola</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatorioentradaprograma">Por Programa</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatorioentradafornecedor">Fornecedor</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatoriodistribuicao">Distribuição</a></li>
+	</ul>
+	<ul id="consultar-dropdown" class="dropdown-content">
+		<li><a class="black-text" data-ui-sref="menu.estoque({programa_entrada: 1})">Estoque Fundamental</a></li>
+		<li><a class="black-text" data-ui-sref="menu.estoque({programa_entrada: 2})">Estoque Mais Educação</a></li>
+	</ul>
+	<ul id="mobile-listar-dropdown" class="dropdown-content sidenav-close">
+		<li><a class="black-text" data-ui-sref="menu.listarsaidas">Saidas</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listarentradas">Entradas</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listarescolas">Escolas</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listaralimentos">Alimentos</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listarfornecedores">Fornecedores</a></li>
+		<li><a class="black-text" data-ui-sref="menu.listartestesdeaceitabilidade">Testes</a></li>
+	</ul>
+	<ul id="mobile-relatorio-dropdown" class="dropdown-content sidenav-close">
+		<li><a class="black-text" data-ui-sref="menu.relatorioporescola">Por Escola</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatoriotipoescola">Tipo Escola</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatorioentradaprograma">Por Programa</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatorioentradafornecedor">Fornecedor</a></li>
+		<li><a class="black-text" data-ui-sref="menu.relatoriodistribuicao">Distribuição</a></li>
+	</ul>
+	<ul id="mobile-consultar-dropdown" class="dropdown-content sidenav-close">
+		<li><a class="black-text" data-ui-sref="menu.estoque({programa_entrada: 1})">Estoque Fundamental</a></li>
+		<li><a class="black-text" data-ui-sref="menu.estoque({programa_entrada: 2})">Estoque Mais Educação</a></li>
+	</ul>
+	<nav class="grey lighten-2" role="navigation">
+		<div class="container nav-wrapper">
+			<a data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				<li><a class="black-text" data-ui-sref="menu.dashboard">Dashboard</a></li>
+				<li><a class="black-text dropdown-trigger" data-target="cadastrar-dropdown">Cadastrar<i
+							class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="black-text dropdown-trigger" data-target="gerar-dropdown">Gerar<i
+							class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="black-text dropdown-trigger" data-target="listar-dropdown">Listagem<i
+							class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="black-text dropdown-trigger" data-target="relatorio-dropdown">Relatório<i
+							class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="black-text dropdown-trigger" data-target="consultar-dropdown">Consultar<i
+							class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="black-text" data-ng-click="menu.logout()"><i
+							class="material-icons right">exit_to_app</i>Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<ul class="sidenav noprint" id="mobile-demo">
+	<li>
+		<a class="black-text sidenav-close" data-ui-sref="menu.dashboard">Dashboard</a>
+	</li>
+	<li>
+		<a class="black-text dropdown-trigger" data-target="mobile-listar-dropdown">Listagem</a>
+	</li>
+	<li>
+		<a class="black-text dropdown-trigger" data-target="mobile-relatorio-dropdown">Relatório</a>
+	</li>
+	<li>
+		<a class="black-text dropdown-trigger" data-target="mobile-consultar-dropdown">Consultar</a>
+	</li>
+	<li>
+		<a class="black-text sidenav-close" data-ng-click="menu.logout()">Logout</a>
+	</li>
+</ul>
+<div class="row" data-ui-view></div>

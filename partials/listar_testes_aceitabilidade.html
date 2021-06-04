@@ -1,0 +1,46 @@
+<div class="container big">
+	<h5 class="center-align">Lista de Testes de Aceitabilidade</h5>
+	<table class="table highlight responsive-table centered col s12" at-table at-paginated at-list="lista.testes"
+		at-config="lista.config">
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td at-title="Escola" at-implicit at-attribute="nome_escola" at-sortable></td>
+				<td at-title="Tipo" data-ng-bind="(item.tipo_escola | tipoEscola)"></td>
+				<td at-title="Quantitativo de Alunos" at-implicit
+					at-attribute="quantitativo_afazer_testeaceitabilidade"></td>
+				<td at-title="Testes Realizado" at-implicit at-attribute="quantitativo_realizado_testeaceitabilidade">
+				</td>
+				<td at-title="Data de Início"
+					data-ng-bind="(item.inicio_periodo_testeaceitabilidade | date:'dd/MM/yyyy')"></td>
+				<td at-title="Data de Término"
+					data-ng-bind="(item.fim_periodo_testeaceitabilidade | date:'dd/MM/yyyy')"></td>
+				<td>
+					<button class="btn-floating red tooltipped hide-on-med-and-down" data-delay="50"
+						data-position="bottom" data-tooltip="Excluir teste"
+						data-ng-click="lista.modal(item.id_testeaceitabilidade)"><i
+							class="material-icons">delete</i></button>
+					<a class="btn-floating tooltipped blue darken-2" data-delay="50" data-position="bottom"
+						data-tooltip="Visualizar respostas"
+						data-ui-sref="menu.imprimirresultadoteste({id_testeaceitabilidade: item.id_testeaceitabilidade})"><i
+							class="material-icons">description</i></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<at-pagination class="right-align" at-list="lista.testes" at-config="lista.config"></at-pagination>
+</div>
+
+<!-- Modal Delete Teste -->
+<div id="excluir_teste" class="modal">
+	<div class="modal-content center-align">
+		<h4>ALERTA!</h4>
+		<p class="flow-text">Deseja excluir o teste de número {{lista.modal_data.id_testeaceitabilidade}} ? Essa ação
+			fará com que todos os resultados referente ao teste sejam excluidos.</p>
+	</div>
+	<div class="modal-footer">
+		<button data-ng-click="lista.excluir(lista.modal_data.id_testeaceitabilidade)"
+			class="modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+		<button class="modal-action modal-close waves-effect waves-red btn-flat">Não</button>
+	</div>
+</div>

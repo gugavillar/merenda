@@ -1,0 +1,68 @@
+<div class="container">
+	<h5 class="center-align">Cadastrar Alimento</h5>
+	<form class="col s12 m12 l12" name="formAlimento" data-ng-submit="alimento.cadastrar()">
+		<div class="row">
+			<div class="input-field col s12 m6 l6">
+				<select required data-ng-model="alimento.novo.tipo_alimento">
+					<option value="" disabled selected>TIPO DO ALIMENTO</option>
+					<option value="1">ALIMENTO SECO</option>
+					<option value="2">AGRICULTURA FAMILIAR</option>
+				</select>
+				<label>Tipo do Alimento</label>
+			</div>
+			<div class="input-field col s12 m6 l6">
+				<i class="material-icons prefix">food_bank</i>
+				<input id="descricao_alimento" name="descricao_alimento" type="text" maxlength="100" required
+					data-ng-minlength="4" data-ng-pattern="/^((?=\w\S)([A-Z0-9\.\,\u00C0-\u00FF\s]{4,100}))$/"
+					data-ng-class="{'invalid': formAlimento.descricao_alimento.$error.minlength || formAlimento.descricao_alimento.$error.pattern}"
+					data-ng-model="alimento.novo.descricao_alimento" data-uppercase>
+				<label for="descricao_alimento">Descrição do Alimento</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12 m6 l6">
+				<p>Distribuição de forma facionada?</p>
+				<p>
+					<label>
+						<input class="with-gap" name="tipo_distribuicao_alimento" type="radio" id="nao"
+							data-ng-model="alimento.novo.tipo_distribuicao_alimento" value="1"
+							data-ng-change="alimento.selectTipo()" required />
+						<span>Não</span>
+					</label>
+					<label>
+						<input class="with-gap" name="tipo_distribuicao_alimento" type="radio" id="sim"
+							data-ng-model="alimento.novo.tipo_distribuicao_alimento" value="2"
+							data-ng-change="alimento.selectTipo()" />
+						<span>Sim</span>
+					</label>
+				</p>
+			</div>
+			<div class="input-field col s6 m3 l3">
+				<input id="unidade_alimento" name="unidade_alimento" type="text" maxlength="2" required
+					data-ng-model="alimento.novo.unidade_alimento" data-ng-minlength="1"
+					data-ng-pattern="/^(([A-Z]{1,2}))$/"
+					data-ng-class="{'invalid': formAlimento.unidade_alimento.$error.minlength || formAlimento.unidade_alimento.$error.pattern}"
+					data-uppercase>
+				<label for="unidade_alimento">Unidade</label>
+			</div>
+			<div class="input-field col s6 m3 l3">
+				<input data-ng-if="alimento.show === '1'" class="right-align" id="estoque_minimo_alimento"
+					name="estoque_minimo_alimento" type="text" required
+					data-ng-model="alimento.novo.estoque_minimo_alimento" data-ng-pattern="/(\d{1,8})$/"
+					data-ng-minlength="1"
+					data-ng-class="{'invalid': formAlimento.estoque_minimo_alimento.$error.minlength || formAlimento.estoque_minimo_alimento.$error.pattern}"
+					maxlength="8" data-uinum>
+				<input data-ng-if="alimento.show === '2'" class="right-align" id="estoque_minimo_alimento"
+					name="estoque_minimo_alimento" type="text" required
+					data-ng-model="alimento.novo.estoque_minimo_alimento"
+					data-ng-pattern="/^((?=\S)\d{1,3}(?:\.\d{3})*,\d{2})$/" data-ng-minlength="3"
+					data-ng-class="{'invalid': formAlimento.estoque_minimo_alimento.$error.minlength || formAlimento.estoque_minimo_alimento.$error.pattern}"
+					data-uimoney maxlength="10">
+				<label for="estoque_minimo_alimento">Estoque Mínimo</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn" data-ng-disabled="formAlimento.$invalid">Cadastrar</button>
+		</div>
+	</form>
+</div>

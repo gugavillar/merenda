@@ -1,0 +1,51 @@
+<div class="container">
+	<h5 class="center-align">ESTOQUE GERAL {{estoque.tipo_programa_entrada | programa}}</h5>
+	<table class="col s12">
+		<tr>
+			<td class="center-align"><img class="pref" src="dist/img/pmg.png" alt="Prefeitura de Gravatá"></td>
+		</tr>
+	</table>
+	<div class="col s12 center-align">
+		<h5>{{estoque.dia | date:'dd/MM/yyyy'}}</h5>
+	</div>
+	<div id="secos" class="col s12 m6 l6 center-align">
+		<span>Alimentos Secos</span>
+		<table class="bordered centered">
+			<thead>
+				<tr>
+					<th class="produto center-align">Produto</th>
+					<th class="center-align">Quantidade</th>
+					<th class="center-align">Unidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="item in estoque.produtos | orderBy:'descricao_alimento'">
+					<td class="produto" data-ng-if="item.tipo_alimento === '1'">{{item.descricao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '1'">{{item.disponivel_estoque |
+						tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '1'">{{item.unidade_alimento}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="agricultura" class="col s12 m6 l6 center-align">
+		<span>Agricultura Familiar</span>
+		<table class="bordered centered">
+			<thead>
+				<tr>
+					<th class="produto center-align">Produto</th>
+					<th class="center-align">Quantidade</th>
+					<th class="center-align">Unidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="item in estoque.produtos | orderBy:'descricao_alimento'">
+					<td class="produto" data-ng-if="item.tipo_alimento === '2'">{{item.descricao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '2'">{{item.disponivel_estoque |
+						tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '2'">{{item.unidade_alimento}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+	<div class="row right-align">
+		<a class="waves-effect waves-light btn btn-large noprint btn-imprimir" data-ng-href="{{imprimir.nota}}"
+			target="_blank"><i class="material-icons right">attach_file</i>Nota</a>
+		<button class="waves-effect waves-light btn btn-large noprint btn-imprimir" data-ng-click="imprimir.print()"><i
+				class="material-icons right">print</i>Imprimir</button>
+	</div>
+	<table class="col s12">
+		<tr>
+			<td class="left-align"><img class="pref" src="dist/img/pmg.png" alt="Prefeitura de Gravatá"></td>
+			<td class="right-align"><img class="fnde" src="dist/img/fnde.png" alt="Fundo Nacional do Desenvolvimento">
+			</td>
+		</tr>
+	</table>
+	<div class="col s12 center-align">
+		<h5>Guia de Entrada do Estoque do Depósito Central</h5>
+		<table class="bordered col s12">
+			<tr>
+				<td><strong>DATA DE EMISSÃO DA NOTA:</strong>&nbsp;{{imprimir.guia.data_emissao_nota_entrada |
+					date:'dd/MM/yyyy'}}
+				</td>
+				<td><strong>Nº:</strong>&nbsp;{{imprimir.guia.id_entrada}}</td>
+			</tr>
+			<tr>
+				<td colspan="3"><strong>ENTIDADE:</strong>&nbsp;SECRETARIA MUNICIPAL DE EDUCAÇÃO</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col s12 center-align">
+		<h5>Dados do Fornecedor</h5>
+		<table class="bordered col s12">
+			<tr>
+				<td><strong>NOME:</strong>&nbsp;{{imprimir.guia.nome_fornecedor}}</td>
+				<td><strong>CNPJ:</strong>&nbsp;{{imprimir.guia.cnpj_fornecedor | cnpj}}</td>
+			</tr>
+			<tr>
+				<td><strong>ENDEREÇO:</strong>&nbsp;{{imprimir.guia.logradouro_fornecedor}},&nbsp;{{imprimir.guia.numero_fornecedor}}
+				</td>
+				<td><strong>CEP:</strong>&nbsp;{{imprimir.guia.cep_fornecedor | cep}}</td>
+			</tr>
+			<tr>
+				<td><strong>BAIRRO:</strong>&nbsp;{{imprimir.guia.bairro_fornecedor}}</td>
+				<td><strong>CIDADE/UF:</strong>&nbsp;{{imprimir.guia.cidade_fornecedor}} -
+					{{imprimir.guia.estado_fornecedor}}
+				</td>
+			</tr>
+			<tr data-ng-if="imprimir.guia.complemento_fornecedor">
+				<td><strong>COMPLEMENTO:</strong>&nbsp;{{imprimir.guia.complemento_fornecedor}}</td>
+			</tr>
+		</table>
+	</div>
+	<div id="secos" class="col s12 m6 l6 center-align">
+		<strong>Alimentos Secos</strong>
+		<table class="bordered centered">
+			<thead>
+				<tr>
+					<th class="produto center-align">Produto</th>
+					<th class="center-align">Qtd Cmp</th>
+					<th class="center-align">Und</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="item in imprimir.produtos | orderBy:'descricao_alimento'">
+					<td class="produto" data-ng-if="item.tipo_alimento === '1'">{{item.descricao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '1'">{{item.quantidade_comprada_itensentrada |
+						tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '1'">{{item.unidade_alimento}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="agricultura" class="col s12 m6 l6 center-align">
+		<strong>Agricultura Familiar</strong>
+		<table class="bordered centered">
+			<thead>
+				<tr>
+					<th class="produto center-align">Produto</th>
+					<th class="center-align">Qtd Cmp</th>
+					<th class="center-align">Und</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="item in imprimir.produtos | orderBy:'descricao_alimento'">
+					<td class="produto" data-ng-if="item.tipo_alimento === '2'">{{item.descricao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '2'">{{item.quantidade_comprada_itensentrada |
+						tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+					<td data-ng-if="item.tipo_alimento === '2'">{{item.unidade_alimento}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="linhas col s11 onlyprint">
+		<div class="col s6">
+			<hr>
+			<p class="center-align">Assinatura do Coordenador</p>
+		</div>
+		<div class="col s6">
+			<hr>
+			<p class="center-align">Responsável Técnico</p>
+		</div>
+	</div>
+</div>

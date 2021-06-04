@@ -1,0 +1,134 @@
+<div class="container">
+	<h5 class="center-align noprint">Relatório de Distribuição</h5>
+	<div class="row center-align">
+		<p class="noprint">O seguinte relatório mostra a quantidade de alimentos adquiridos na nota escolhida e sua
+			respectiva distribuição</p>
+	</div>
+	<form name="formRelatorio" data-ng-submit="relatorio.gerar()">
+		<div class="row">
+			<div class="input-field col s12 m12 l12">
+				<select
+					data-ng-options="nota.id_entrada as nota.nome_fornecedor + ' - ' + nota.num_nota_entrada + ' - ' + (nota.programa_entrada | programa) group by (nota.programa_entrada | programa) for nota in relatorio.notas | orderBy:['nome_forncedor', 'num_nota_entrada']"
+					data-ng-model="relatorio.dados.id_entrada" data-ng-change="relatorio.clean()" required>
+					<option value="" disabled selected>ESCOLHA A NOTA</option>
+				</select>
+				<label>Nota</label>
+			</div>
+		</div>
+		<div class="row right-align">
+			<button class="waves-effect waves-light btn btn-large"
+				data-ng-disabled="formRelatorio.$invalid">Gerar</button>
+		</div>
+	</form>
+</div>
+<div class="container big">
+	<div data-ng-if="relatorio.gerado">
+		<table class="col s12">
+			<tr>
+				<td class="center-align"><img class="pref" src="dist/img/pmg.png" alt="Prefeitura de Gravatá"></td>
+			</tr>
+		</table>
+		<div class="col s12 center-align">
+			<h5>RELATÓRIO</h5>
+		</div>
+		<div class="col s12 center-align">
+			<h5>Dados do Fornecedor</h5>
+			<table class="bordered col s12">
+				<tr>
+					<td><strong>NOME:</strong>&nbsp;{{relatorio.data.nome_fornecedor}}</td>
+					<td><strong>CNPJ:</strong>&nbsp;{{relatorio.data.cnpj_fornecedor | cnpj}}</td>
+				</tr>
+				<tr>
+					<td><strong>ENDEREÇO:</strong>&nbsp;{{relatorio.data.logradouro_fornecedor}},&nbsp;{{relatorio.data.numero_fornecedor}}
+					</td>
+					<td><strong>CEP:</strong>&nbsp;{{relatorio.data.cep_fornecedor | cep}}</td>
+				</tr>
+				<tr>
+					<td><strong>BAIRRO:</strong>&nbsp;{{relatorio.data.bairro_fornecedor}}</td>
+					<td><strong>CIDADE/UF:</strong>&nbsp;{{relatorio.data.cidade_fornecedor}} -
+						{{relatorio.data.estado_fornecedor}}</td>
+				</tr>
+				<tr data-ng-if="relatorio.data.complemento_fornecedor">
+					<td><strong>COMPLEMENTO:</strong>&nbsp;{{relatorio.data.complemento_fornecedor}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="col s12 center-align">
+			<h5>Produtos da Nota N˚ {{relatorio.data.num_nota_entrada}}</h5>
+		</div>
+		<div id="secos" class="col s12 m12 l6 center-align">
+			<strong>Alimentos Secos</strong>
+			<table class="bordered centered">
+				<thead>
+					<tr>
+						<th class="center-align">Produto</th>
+						<th class="center-align">Qtd Cmp</th>
+						<th class="center-align">Qtd Dist</th>
+						<th class="center-align">Und</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="item in relatorio.produtosnota | orderBy:'descricao_alimento'">
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.descricao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.quantidade_comprada_itensentrada |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.quantidade_distribuida_itensentrada |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.unidade_alimento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="agricultura" class="col s12 m12 l6 center-align">
+			<strong>Agricultura Familiar</strong>
+			<table class="bordered centered">
+				<thead>
+					<tr>
+						<th class="center-align">Produto</th>
+						<th class="center-align">Qtd Cmp</th>
+						<th class="center-align">Qtd Dist</th>
+						<th class="center-align">Und</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="item in relatorio.produtosnota | orderBy:'descricao_alimento'">
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.descricao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.quantidade_comprada_itensentrada |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.quantidade_distribuida_itensentrada |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.unidade_alimento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div data-ng-if="relatorio.produtosdistribuicao.length" class="col s12 center-align">
+			<h5>Guias de Saídas com a Nota N˚ {{relatorio.data.num_nota_entrada}}</h5>
+			<table class="bordered centered col s12">
+				<thead>
+					<tr>
+						<th class="center-align">N˚ Guia</th>
+						<th class="hide-on-med-and-down center-align">Data Emissão</th>
+						<th class="center-align">Escola</th>
+						<th class="center-align">Produto</th>
+						<th class="center-align">Distribuído</th>
+						<th class="center-align">Und</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="item in relatorio.produtosdistribuicao | orderBy:'descricao_alimento'">
+						<td>{{item.num_saida}}</td>
+						<td class="hide-on-med-and-down">{{item.data_emissao_saida | data}}</td>
+						<td>{{item.nome_escola}} - {{item.tipo_escola | tipoEscola}}</td>
+						<td>{{item.descricao_alimento}}</td>
+						<td>{{item.quantidade_saida_itenssaida | tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td>{{item.unidade_alimento}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div data-ng-if="!relatorio.produtosdistribuicao.length" class="col s12 center-align">
+			<h5>NÃO HOUVE DISTRIBUIÇÃO COM OS ITENS DA NOTA SOLICITADA</h5>
+		</div>
+	</div>
+</div>

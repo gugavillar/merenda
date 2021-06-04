@@ -1,0 +1,144 @@
+<div>
+	<h5 class="center-align">Gerar Guia de Saída</h5>
+	<div class="col s10 m10 l8">
+		<form class="col s12 m12 l12" name="formGuia" data-ng-submit="gerar.cadastrar()">
+			<div class="row">
+				<div class="input-field col s8 m8 l8">
+					<select
+						data-ng-options="escola.id_escola as escola.nome_escola group by (escola.tipo_escola | tipoEscola) for escola in gerar.escolas | orderBy:'tipo_escola'"
+						data-ng-model="gerar.dados.id_escola_saida" data-ng-disabled="gerar.blockestoque" required>
+						<option value="" disabled selected>ESCOLHA A ESCOLA</option>
+					</select>
+					<label>Escola</label>
+				</div>
+				<button class="waves-effect waves-light btn btn-floating-form"
+					data-ng-disabled="formGuia.$invalid || gerar.blockestoque">Gerar</button>
+			</div>
+		</form>
+		<form class="col s12 m12 l12" name="formEstoque" data-ng-submit="gerar.liberarProdutos()">
+			<div class="row">
+				<div class="input-field col s8 m8 l8">
+					<select
+						data-ng-options="estoque.id_entrada as estoque.nome_fornecedor + ' - ' + estoque.num_nota_entrada + ' - ' + (estoque.programa_entrada | programa) group by (estoque.programa_entrada | programa) disable when estoque.disabled === true for estoque in gerar.notas"
+						data-ng-model="gerar.nota.id_entrada"
+						data-ng-change="gerar.getProdutosNota(gerar.nota.id_entrada)" required
+						data-ng-disabled="!gerar.blockestoque">
+						<option value="" disabled selected>ESCOLHA A NOTA</option>
+					</select>
+					<label>Nota</label>
+				</div>
+				<button class="waves-effect waves-light btn btn-floating-form"
+					data-ng-disabled="formEstoque.$invalid">Usar</button>
+			</div>
+		</form>
+		<form class="col s12 m12 l12" name="formProdutos" data-ng-submit="gerar.inserir()">
+			<div class="row">
+				<div class="input-field col s12 m5 l5">
+					<select data-ng-change="gerar.resta(gerar.itens.id_alimento_itenssaida)"
+						data-ng-options="alimento.id_alimento as alimento.descricao_alimento disable when alimento.disabled === true for alimento in gerar.alimentos | orderBy:'descricao_alimento'"
+						data-ng-model="gerar.itens.id_alimento_itenssaida" data-ng-disabled="!gerar.block" required>
+						<option value="" disabled selected>ESCOLHA O PRODUTO</option>
+					</select>
+					<label>Produto</label>
+				</div>
+				<div class="input-field col s12 m2 l2">
+					<input class="right-align" id="disponivel_estoque" name="disponivel_estoque" type="text" required
+						data-ng-model="gerar.itens.disponivel_estoque" disabled>
+					<label for="disponivel_estoque">Disponível</label>
+				</div>
+				<div class="input-field col s12 m2 l2">
+					<input data-ng-if="gerar.show === '1'" data-ng-change="gerar.check()" class="right-align"
+						id="quantidade_saida_itenssaida" name="quantidade_saida_itenssaida" type="text" required
+						data-ng-model="gerar.itens.quantidade_saida_itenssaida" data-ng-pattern="/^((?=\S)(\d{1,10}))$/"
+						data-ng-minlength="1"
+						data-ng-class="{'invalid': formProdutos.quantidade_saida_itenssaida.$error.minlength || formProdutos.quantidade_saida_itenssaida.$error.pattern}"
+						data-uinum maxlength="10" data-ng-disabled="!gerar.block">
+					<input data-ng-if="gerar.show === '2'" data-ng-change="gerar.check()" class="right-align"
+						id="quantidade_saida_itenssaida" name="quantidade_saida_itenssaida" type="text" required
+						data-ng-model="gerar.itens.quantidade_saida_itenssaida"
+						data-ng-pattern="/^((?=\S)\d{1,3}(?:\.\d{3})*,\d{2})$/" data-ng-minlength="3"
+						data-ng-class="{'invalid': formProdutos.quantidade_saida_itenssaida.$error.minlength || formProdutos.quantidade_saida_itenssaida.$error.pattern}"
+						data-uimoney maxlength="10" data-ng-disabled="!gerar.block">
+					<label for="quantidade_saida_itenssaida">Quantidade</label>
+				</div>
+				<button class="btn-floating btn-floating-guia" data-ng-disabled="formProdutos.$invalid"><i
+						class="material-icons">add</i></button>
+			</div>
+		</form>
+	</div>
+	<div data-ng-if="gerar.nota" class="col s2 m2 l4">
+		<p class="flow-text center-align">PRODUTOS DA NOTA</p>
+		<table class="bordered centered">
+			<thead>
+				<tr>
+					<th class="produto center-align">PRODUTO</th>
+					<th class="center-align">QUANTIDADE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="item in gerar.produtosnota">
+					<td>{{item.descricao_alimento}}</td>
+					<td>{{(item.quantidade_comprada_itensentrada - item.quantidade_distribuida_itensentrada) |
+						tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col s12 center-align" data-ng-if="gerar.produtos.length >= 1">
+		<button class="waves-effect waves-light btn btn-large"
+			data-ui-sref="menu.imprimirguiasaida({id_saida: gerar.id_saida})"><i
+				class="material-icons left">description</i>Visualizar</button>
+	</div>
+	<div class="container" data-ng-if="gerar.produtos.length >= 1">
+		<div class="col s6 center-align">
+			<span><strong>Alimentos Secos</strong></span>
+			<table class="bordered centered">
+				<thead>
+					<tr>
+						<th class="produto center-align">Produto</th>
+						<th class="center-align">Quantidade</th>
+						<th class="center-align">Unidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="item in gerar.produtos | orderBy:'descricao_alimento'">
+						<td class="produto" data-ng-if="item.tipo_alimento === '1'">{{item.descricao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.quantidade_saida_itenssaida |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">{{item.unidade_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '1'">
+							<button class="btn-floating red"
+								data-ng-click="gerar.excluir(item.id_itenssaida, item.id_alimento)"><i
+									class="material-icons">delete</i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col s6 center-align">
+			<span><strong>Agricultura Familiar</strong></span>
+			<table class="bordered centered">
+				<thead>
+					<tr>
+						<th class="produto center-align">Produto</th>
+						<th class="center-align">Quantidade</th>
+						<th class="center-align">Unidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="item in gerar.produtos | orderBy:'descricao_alimento'">
+						<td class="produto" data-ng-if="item.tipo_alimento === '2'">{{item.descricao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.quantidade_saida_itenssaida |
+							tipoDistribuicao:item.tipo_distribuicao_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">{{item.unidade_alimento}}</td>
+						<td data-ng-if="item.tipo_alimento === '2'">
+							<button class="btn-floating red"
+								data-ng-click="gerar.excluir(item.id_itenssaida, item.id_alimento)"><i
+									class="material-icons">delete</i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
